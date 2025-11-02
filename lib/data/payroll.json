@@ -1,0 +1,17 @@
+{
+  "Doctor": {
+    "tax": 0.10,
+    "insurance": 0.05,
+    "retire": 0.03
+  },
+  "Nurse": {
+    "tax": 0.08,
+    "insurance": 0.04,
+    "retire": 0.02
+  },
+  "Administrative": {
+    "tax": 0.07,
+    "insurance": 0.03,
+    "retire": 0.02
+  }
+}

@@ -15,10 +15,6 @@ class StaffManager {
     throw UnimplementedError();
   }
 
-  void updateSalary(String id, double newSalary) {
-    throw UnimplementedError();
-  }
-
   void displayAllStaff() {
     throw UnimplementedError();
   }
@@ -28,6 +24,10 @@ class StaffManager {
   }
 
   double getTotalMonthlyPayroll() {
+    throw UnimplementedError();
+  }
+
+  List<Staff> getStaffOnProbation() {
     throw UnimplementedError();
   }
 }

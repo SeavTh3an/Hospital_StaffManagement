@@ -1,3 +1,5 @@
+import 'payroll.dart';
+
 enum Position { Doctor, Nurse, Administrative }
 
 enum Gender { Male, Female }
@@ -17,6 +19,7 @@ abstract class Staff {
   double salary;
   final Position position;
   final DateTime hireDate;
+  Payroll payroll;
 
   Staff(
     this.name,
@@ -25,6 +28,7 @@ abstract class Staff {
     this.salary,
     this.position,
     this.hireDate,
+    this.payroll,
   ) : ID = _generateDisplayID(
             position, null); // Default null role for non-admins
 
@@ -35,6 +39,7 @@ abstract class Staff {
     this.gender,
     this.salary,
     this.hireDate,
+    this.payroll,
     Role role,
   )   : position = Position.Administrative,
         ID = _generateDisplayID(Position.Administrative, role);
@@ -66,11 +71,10 @@ abstract class Staff {
 
   double calculateSalaryWithOvertime(double hours);
 
-  void updateInfo(String name, String department, double Salary);
+  void updateInfo(String name);
 
   bool isOnProbation();
 
   int getWorkingYears();
 
-  double getMonthlyPayroll();
 }

@@ -1,3 +1,6 @@
+
+import 'package:my_first_project/domain/payroll.dart';
+
 import 'staff.dart';
 
 class AdministrativeStaff extends Staff {
@@ -10,7 +13,16 @@ class AdministrativeStaff extends Staff {
     required double salary,
     required DateTime hireDate,
     required this.role,
-  }) : super.admin(name, dob, gender, salary, hireDate, role);
+    required Payroll payroll, 
+  }) : super.admin(
+          name,
+          dob,
+          gender,
+          salary,
+          hireDate,
+          payroll, 
+          role,
+        );
 
   @override
   double calculateBonus() {
@@ -23,7 +35,7 @@ class AdministrativeStaff extends Staff {
   }
 
   @override
-  void updateInfo(String name, String department, double salary) {
+  void updateInfo(String name) {
     throw UnimplementedError();
   }
 

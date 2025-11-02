@@ -1,5 +1,5 @@
 import 'staff.dart';
-
+import 'payroll.dart';
 class Nurse extends Staff {
   String shift;
 
@@ -10,7 +10,8 @@ class Nurse extends Staff {
     required double salary,
     required DateTime hireDate,
     required this.shift,
-  }) : super(name, dob, gender, salary, Position.Nurse, hireDate);
+    required Payroll payroll,
+  }) : super(name, dob, gender, salary, Position.Nurse, hireDate, payroll);
 
   bool isNightShift() {
     
@@ -28,7 +29,7 @@ class Nurse extends Staff {
   }
 
   @override
-  void updateInfo(String name, String department, double salary) {
+  void updateInfo(String name) {
     throw UnimplementedError();
   }
 
@@ -51,4 +52,6 @@ class Nurse extends Staff {
   void displayInfo() {
     throw UnimplementedError();
   }
+
+  
 }

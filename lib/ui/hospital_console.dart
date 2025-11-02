@@ -39,7 +39,7 @@ class HospitalConsole {
           findStaff();
           break;
         case 5:
-          updateSalary();
+          // updateSalary();
           break;
         case 6:
           print('Total Payroll: \$${staffManager.getTotalMonthlyPayroll().toStringAsFixed(2)}');
@@ -111,14 +111,14 @@ class HospitalConsole {
     }
   }
 
-  void updateSalary() {
-    stdout.write('Enter Staff ID: ');
-    final id = stdin.readLineSync() ?? '';
-    stdout.write('Enter new Salary: ');
-    final n = double.tryParse(stdin.readLineSync() ?? '') ?? 0.0;
-    staffManager.updateSalary(id, n);
-    print("Salary updated (if ID existed).");
-  }
+  // void updateSalary() {
+  //   stdout.write('Enter Staff ID: ');
+  //   final id = stdin.readLineSync() ?? '';
+  //   stdout.write('Enter new Salary: ');
+  //   final n = double.tryParse(stdin.readLineSync() ?? '') ?? 0.0;
+  //   staffManager.updateSalary(id, n);
+  //   print("Salary updated (if ID existed).");
+  // }
 
   // void getStaffByPosition() {
   //   stdout.write('Enter Position (doctor / nurse / administrative): ');

@@ -1,5 +1,5 @@
 import 'staff.dart';
-
+import 'payroll.dart';
 class Doctor extends Staff {
   String specialization;
   int experienceYears;
@@ -12,7 +12,8 @@ class Doctor extends Staff {
     required DateTime hireDate,
     required this.specialization,
     required this.experienceYears,
-  }) : super(name, dob, gender, salary, Position.Doctor, hireDate);
+    required Payroll payroll,
+  }) : super(name, dob, gender, salary, Position.Doctor, hireDate, payroll);
 
   @override
   double calculateBonus() {
@@ -27,7 +28,7 @@ class Doctor extends Staff {
   }
 
   @override
-  void updateInfo(String name, String department, double salary) {
+  void updateInfo(String name) {
     
     throw UnimplementedError();
   }
