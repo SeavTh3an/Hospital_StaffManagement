@@ -1,27 +1,19 @@
-import 'package:uuid/uuid.dart';
-
 enum Position { Doctor, Nurse, Administrative }
+
+enum Gender { Male, Female }
 
 enum Role { Receptionist, Accountant }
 
-enum Department {
-  Liver,
-  Heart,
-  Brain,
-}
-
 abstract class Staff {
-  static final _uuid = Uuid();
   static int _counterDoctor = 0;
   static int _counterNurse = 0;
   static int _counterReceptionist = 0;
   static int _counterAccountant = 0;
 
-  final String id; // Internal UUID
-  final String displayID; // Human-friendly ID
+  final String ID; // Human-friendly ID
   String name;
+  final Gender gender;
   final DateTime dob;
-  final String gender;
   double salary;
   final Position position;
   final DateTime hireDate;
@@ -33,8 +25,8 @@ abstract class Staff {
     this.salary,
     this.position,
     this.hireDate,
-  )   : id = _uuid.v4(),
-        displayID = _generateDisplayID(position, null); // Default null role for non-admins
+  ) : ID = _generateDisplayID(
+            position, null); // Default null role for non-admins
 
   // For Administrative Staff, pass Role
   Staff.admin(
@@ -44,9 +36,8 @@ abstract class Staff {
     this.salary,
     this.hireDate,
     Role role,
-  )   : id = _uuid.v4(),
-        position = Position.Administrative,
-        displayID = _generateDisplayID(Position.Administrative, role);
+  )   : position = Position.Administrative,
+        ID = _generateDisplayID(Position.Administrative, role);
 
   static String _generateDisplayID(Position position, [Role? role]) {
     switch (position) {
@@ -68,14 +59,18 @@ abstract class Staff {
         }
     }
   }
-    void displayInfo() {
-    print('ID: $id');
-    print('DisplayID: $displayID');
-    print('Name: $name');
-    print('Position: ${position.name}');
-    print('Salary: $salary');
-    print('Hire Date: $hireDate');
-  }
-  double calculateBonus();
-}
 
+  void displayInfo() {}
+
+  double calculateBonus();
+
+  double calculateSalaryWithOvertime(double hours);
+
+  void updateInfo(String name, String department, double Salary);
+
+  bool isOnProbation();
+
+  int getWorkingYears();
+
+  double getMonthlyPayroll();
+}

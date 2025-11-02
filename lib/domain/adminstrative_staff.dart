@@ -1,21 +1,16 @@
 import 'staff.dart';
 
-class Nurse extends Staff {
-  String shift;
+class AdministrativeStaff extends Staff {
+  Role role;
 
-  Nurse({
+  AdministrativeStaff({
     required String name,
     required DateTime dob,
     required Gender gender,
     required double salary,
     required DateTime hireDate,
-    required this.shift,
-  }) : super(name, dob, gender, salary, Position.Nurse, hireDate);
-
-  bool isNightShift() {
-    
-    throw UnimplementedError();
-  }
+    required this.role,
+  }) : super.admin(name, dob, gender, salary, hireDate, role);
 
   @override
   double calculateBonus() {
