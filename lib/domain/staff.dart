@@ -1,9 +1,11 @@
 import 'payroll.dart';
+import 'doctor.dart';
+import 'nurse.dart';
+import 'adminstrative_staff.dart';
+
 
 enum Position { Doctor, Nurse, Administrative }
-
 enum Gender { Male, Female }
-
 enum Role { Receptionist, Accountant }
 
 abstract class Staff {
@@ -12,7 +14,7 @@ abstract class Staff {
   static int _counterReceptionist = 0;
   static int _counterAccountant = 0;
 
-  final String ID; // Human-friendly ID
+  final String ID;
   String name;
   final Gender gender;
   final DateTime dob;
@@ -29,10 +31,9 @@ abstract class Staff {
     this.position,
     this.hireDate,
     this.payroll,
-  ) : ID = _generateDisplayID(
-            position, null); // Default null role for non-admins
+  ) : ID = _generateDisplayID(position, null);
 
-  // For Administrative Staff, pass Role
+  // For Administrative staff
   Staff.admin(
     this.name,
     this.dob,
@@ -65,16 +66,27 @@ abstract class Staff {
     }
   }
 
-  void displayInfo() {}
-
+  // Abstract methods
+  void displayInfo();
   double calculateBonus();
-
   double calculateSalaryWithOvertime(double hours);
-
   void updateInfo(String name);
-
   bool isOnProbation();
-
   int getWorkingYears();
 
+  // JSON serialization
+  Map<String, dynamic> toJson();
+
+  factory Staff.fromJson(Map<String, dynamic> json) {
+    switch (json['position']) {
+      case 'Doctor':
+        return Doctor.fromJson(json);
+      case 'Nurse':
+        return Nurse.fromJson(json);
+      case 'Administrative':
+        return AdministrativeStaff.fromJson(json);
+      default:
+        throw Exception('Unknown position: ${json['position']}');
+    }
+  }
 }

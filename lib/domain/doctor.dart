@@ -15,6 +15,32 @@ class Doctor extends Staff {
     required Payroll payroll,
   }) : super(name, dob, gender, salary, Position.Doctor, hireDate, payroll);
 
+    factory Doctor.fromJson(Map<String, dynamic> json) {
+    return Doctor(
+      name: json['name'],
+      dob: DateTime.parse(json['dob']),
+      gender: Gender.values.firstWhere((g) => g.toString() == 'Gender.${json['gender']}'),
+      salary: json['salary'],
+      hireDate: DateTime.parse(json['hireDate']),
+      specialization: json['specialization'] ?? '',
+      experienceYears: json['experienceYears'] ?? 0,
+      payroll: Payroll.fromJson(json['payroll']),
+    );
+  }
+
+    @override
+    Map<String, dynamic> toJson() => {
+        'ID': ID,
+        'name': name,
+        'dob': dob.toIso8601String(),
+        'gender': gender.toString().split('.').last,
+        'salary': salary,
+        'position': 'Doctor',
+        'hireDate': hireDate.toIso8601String(),
+        'specialization': specialization,
+        'experienceYears': experienceYears,
+        'payroll': payroll.toJson(),
+      };
   @override
   double calculateBonus() {
     
@@ -45,11 +71,6 @@ class Doctor extends Staff {
     throw UnimplementedError();
   }
 
-  @override
-  double getMonthlyPayroll() {
-    
-    throw UnimplementedError();
-  }
 
   @override
   void displayInfo() {
