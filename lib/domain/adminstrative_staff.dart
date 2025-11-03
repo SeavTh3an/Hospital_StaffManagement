@@ -1,7 +1,5 @@
-
-import 'package:my_first_project/domain/payroll.dart';
-
 import 'staff.dart';
+import 'payroll.dart';
 
 class AdministrativeStaff extends Staff {
   Role role;
@@ -13,17 +11,10 @@ class AdministrativeStaff extends Staff {
     required double salary,
     required DateTime hireDate,
     required this.role,
-    required Payroll payroll, 
-  }) : super.admin(
-          name,
-          dob,
-          gender,
-          salary,
-          hireDate,
-          payroll, 
-          role,
-        );
-    factory AdministrativeStaff.fromJson(Map<String, dynamic> json) {
+    required Payroll payroll,
+  }) : super.admin(name, dob, gender, salary, hireDate, payroll, role);
+
+  factory AdministrativeStaff.fromJson(Map<String, dynamic> json) {
     return AdministrativeStaff(
       name: json['name'],
       dob: DateTime.parse(json['dob']),
@@ -34,9 +25,10 @@ class AdministrativeStaff extends Staff {
       payroll: Payroll.fromJson(json['payroll']),
     );
   }
-    @override
-    Map<String, dynamic> toJson() => {
-        'ID': ID,
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'ID': id,
         'name': name,
         'dob': dob.toIso8601String(),
         'gender': gender.toString().split('.').last,
@@ -48,32 +40,39 @@ class AdministrativeStaff extends Staff {
       };
 
   @override
+  void displayInfo() {
+    final bonus = calculateBonus();
+    final workingYears = getWorkingYears();
+    print('ID: $id');
+    print('Name: $name');
+    print('Gender: ${gender.toString().split('.').last}');
+    print('DOB: ${dob.toIso8601String()}');
+    print('Position: Administrative');
+    print('Role: ${role.toString().split('.').last}');
+    print('Working Years: $workingYears');
+    print('Gross Salary: \$${salary.toStringAsFixed(2)}');
+    print('Net Salary: \$${payroll.calculateNetSalary(salary).toStringAsFixed(2)}');
+    print('Bonus: \$${bonus.toStringAsFixed(2)}');
+    print('Hire Date: ${hireDate.toIso8601String()}');
+  }
+
+  @override
   double calculateBonus() {
-    throw UnimplementedError();
+    return role == Role.Accountant ? salary * 0.12 : salary * 0.07;
   }
 
   @override
-  double calculateSalaryWithOvertime(double hours) {
-    throw UnimplementedError();
-  }
-
-  @override
-  void updateInfo(String name) {
-    throw UnimplementedError();
+  void updateInfo(String newName) {
+    name = newName;
   }
 
   @override
   bool isOnProbation() {
-    throw UnimplementedError();
+    return DateTime.now().difference(hireDate).inDays < 60;
   }
 
   @override
   int getWorkingYears() {
-    throw UnimplementedError();
-  }
-
-  @override
-  void displayInfo() {
-    throw UnimplementedError();
+    return DateTime.now().year - hireDate.year;
   }
 }

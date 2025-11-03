@@ -29,7 +29,7 @@ class Nurse extends Staff {
 
   @override
   Map<String, dynamic> toJson() => {
-        'ID': ID,
+        'ID': id,
         'name': name,
         'dob': dob.toIso8601String(),
         'gender': gender.toString().split('.').last,
@@ -39,37 +39,48 @@ class Nurse extends Staff {
         'shift': shift,
         'payroll': payroll.toJson(),
       };
-  bool isNightShift() {
-    throw UnimplementedError();
+
+  @override
+  void displayInfo() {
+    final bonus = calculateBonus();
+    final workingYears = getWorkingYears();
+    print('ID: $id');
+    print('Name: $name');
+    print('Gender: ${gender.toString().split('.').last}');
+    print('DOB: ${dob.toIso8601String()}');
+    print('Position: Nurse');
+    print('Shift: $shift');
+    print('Gross Salary: \$${salary.toStringAsFixed(2)}');
+    print('Net Salary: \$${payroll.calculateNetSalary(salary).toStringAsFixed(2)}');
+    print('Working Years: $workingYears');
+    print('Bonus: \$${bonus.toStringAsFixed(2)}');
+    print('Hire Date: ${hireDate.toIso8601String()}');
   }
 
   @override
-  double calculateBonus() {
-    throw UnimplementedError();
-  }
-
-  @override
-  double calculateSalaryWithOvertime(double hours) {
-    throw UnimplementedError();
-  }
-
-  @override
-  void updateInfo(String name) {
-    throw UnimplementedError();
+  void updateInfo(String newName) {
+    name = newName;
   }
 
   @override
   bool isOnProbation() {
-    throw UnimplementedError();
+    return DateTime.now().difference(hireDate).inDays < 90;
   }
 
   @override
   int getWorkingYears() {
-    throw UnimplementedError();
+    return DateTime.now().year - hireDate.year;
+  }
+
+  bool isNightShift() {
+    return shift.toLowerCase() == 'night';
   }
 
   @override
-  void displayInfo() {
-    throw UnimplementedError();
+  double calculateBonus() {
+    // Nurses get bonus only if night shift
+    return shift.toLowerCase() == 'night' ? salary * 0.10 : 0.0;
   }
+
+
 }

@@ -3,18 +3,19 @@ import 'doctor.dart';
 import 'nurse.dart';
 import 'adminstrative_staff.dart';
 
-
 enum Position { Doctor, Nurse, Administrative }
 enum Gender { Male, Female }
 enum Role { Receptionist, Accountant }
 
 abstract class Staff {
+  // Counters for generating unique IDs
   static int _counterDoctor = 0;
   static int _counterNurse = 0;
   static int _counterReceptionist = 0;
   static int _counterAccountant = 0;
 
-  final String ID;
+
+  final String id; // Auto-generated ID
   String name;
   final Gender gender;
   final DateTime dob;
@@ -23,6 +24,8 @@ abstract class Staff {
   final DateTime hireDate;
   Payroll payroll;
 
+
+// Constructor for Doctor and Nurse
   Staff(
     this.name,
     this.dob,
@@ -31,7 +34,8 @@ abstract class Staff {
     this.position,
     this.hireDate,
     this.payroll,
-  ) : ID = _generateDisplayID(position, null);
+  ) : id = _generateDisplayID(position);
+
 
   // For Administrative staff
   Staff.admin(
@@ -43,8 +47,9 @@ abstract class Staff {
     this.payroll,
     Role role,
   )   : position = Position.Administrative,
-        ID = _generateDisplayID(Position.Administrative, role);
+        id = _generateDisplayID(Position.Administrative, role);
 
+  /// Generate unique IDs based on position and role
   static String _generateDisplayID(Position position, [Role? role]) {
     switch (position) {
       case Position.Doctor:
@@ -69,8 +74,7 @@ abstract class Staff {
   // Abstract methods
   void displayInfo();
   double calculateBonus();
-  double calculateSalaryWithOvertime(double hours);
-  void updateInfo(String name);
+  void updateInfo(String name); // Updates name
   bool isOnProbation();
   int getWorkingYears();
 
@@ -89,4 +93,6 @@ abstract class Staff {
         throw Exception('Unknown position: ${json['position']}');
     }
   }
+
+  
 }

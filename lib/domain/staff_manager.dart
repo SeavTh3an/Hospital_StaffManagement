@@ -1,4 +1,5 @@
 import 'staff.dart';
+import 'nurse.dart';
 import '../data/staff_repository.dart';
 
 class StaffManager {
@@ -17,32 +18,33 @@ class StaffManager {
   }
 
   /// Remove a staff by ID and update JSON
-  void removeStaff(String id) {
-    // Safely find staff by ID
-    Staff? staffToRemove;
-    for (var s in staffList) {
-      if (s.ID == id) {
-        staffToRemove = s;
-        break;
-      }
-    }
-
+  bool removeStaff(String id) {
+    final staffToRemove = findStaffById(id);
     if (staffToRemove != null) {
       staffList.remove(staffToRemove);
-      repository.saveStaffByPosition(
-          staffToRemove.position, getStaffByPosition(staffToRemove.position));
+      repository.saveStaffByPosition(staffToRemove.position, getStaffByPosition(staffToRemove.position));
+      return true;
     }
-    // If not found, do nothing
+    return false;
   }
 
-  /// Find a staff by ID
+  // Find a staff by ID
   Staff? findStaffById(String id) {
     for (var s in staffList) {
-      if (s.ID == id) {
-        return s;
-      }
+      if (s.id == id) return s;
     }
-    return null; // Not found
+    return null;
+  }
+
+  /// Update salary of a staff by ID and save to JSON
+  bool updateSalary(String id, double newSalary) {
+    final staff = findStaffById(id);
+    if (staff != null) {
+      staff.salary = newSalary;
+      repository.saveStaffByPosition(staff.position, getStaffByPosition(staff.position));
+      return true;
+    }
+    return false;
   }
 
   /// Display info of all staff
@@ -75,6 +77,11 @@ class StaffManager {
   /// Get staff who are still on probation
   List<Staff> getStaffOnProbation() {
     return staffList.where((s) => s.isOnProbation()).toList();
+  }
+
+  /// Get nurses on duty for a specific shift
+  List<Nurse> getDutyToday(String shift) {
+    return staffList.where((s) => s is Nurse && s.shift == shift).cast<Nurse>().toList(); 
   }
 
   /// Save all staff to JSON files (for backup or after bulk changes)
