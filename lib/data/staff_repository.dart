@@ -4,9 +4,9 @@ import '../domain/staff.dart';
 
 class StaffRepository {
   final Map<Position, String> _filePaths = {
-    Position.Doctor: 'lib/data/doctor.json',
-    Position.Nurse: 'lib/data/nurse.json',
-    Position.Administrative: 'lib/data/administrative.json',
+    Position.Doctor: 'data/doctor.json',
+    Position.Nurse: 'data/nurse.json',
+    Position.Administrative: 'data/administrative.json',
   };
 
   List<Staff> loadAllStaff() {
