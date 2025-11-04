@@ -4,10 +4,25 @@
     "name": "Meyloy",
     "dob": "2025-11-04T10:48:38.725861",
     "gender": "Female",
-    "salary": 10000.0,
+    "salary": 500.0,
     "position": "Administrative",
     "hireDate": "2025-11-04T10:48:42.223954",
     "role": "Accountant",
+    "payroll": {
+      "tax": 0.07,
+      "insurance": 0.03,
+      "retire": 0.02
+    }
+  },
+  {
+    "ID": "REC001",
+    "name": "TheanSloy",
+    "dob": "2000-10-01T00:00:00.000",
+    "gender": "Male",
+    "salary": 600.0,
+    "position": "Administrative",
+    "hireDate": "2025-01-05T00:00:00.000",
+    "role": "Receptionist",
     "payroll": {
       "tax": 0.07,
       "insurance": 0.03,

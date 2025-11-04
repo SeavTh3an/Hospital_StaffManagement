@@ -4,10 +4,25 @@
     "name": "Theanloy",
     "dob": "2025-11-04T10:44:44.832145",
     "gender": "Male",
-    "salary": 10000.0,
+    "salary": 5000.0,
     "position": "Nurse",
     "hireDate": "2025-11-04T10:44:51.799965",
     "shift": "night",
+    "payroll": {
+      "tax": 0.08,
+      "insurance": 0.04,
+      "retire": 0.02
+    }
+  },
+  {
+    "ID": "NUR002",
+    "name": "Sivmei",
+    "dob": "2000-03-03T00:00:00.000",
+    "gender": "Female",
+    "salary": 5000.0,
+    "position": "Nurse",
+    "hireDate": "2022-02-02T00:00:00.000",
+    "shift": "afternoon",
     "payroll": {
       "tax": 0.08,
       "insurance": 0.04,

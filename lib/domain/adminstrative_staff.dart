@@ -43,6 +43,7 @@ class AdministrativeStaff extends Staff {
   void displayInfo() {
     final bonus = calculateBonus();
     final workingYears = getWorkingYears();
+    final netSalary = payroll.calculateNetSalary(salary, bonus: bonus); 
     print('ID: $id');
     print('Name: $name');
     print('Gender: ${gender.toString().split('.').last}');
@@ -50,9 +51,9 @@ class AdministrativeStaff extends Staff {
     print('Position: Administrative');
     print('Role: ${role.toString().split('.').last}');
     print('Working Years: $workingYears');
-    print('Gross Salary: \$${salary.toStringAsFixed(2)}');
-    print('Net Salary: \$${payroll.calculateNetSalary(salary).toStringAsFixed(2)}');
     print('Bonus: \$${bonus.toStringAsFixed(2)}');
+    print('Gross Salary: \$${salary.toStringAsFixed(2)}');
+    print('Net Salary (after tax & deductions): \$${netSalary.toStringAsFixed(2)}'); 
     print('Hire Date: ${hireDate.toIso8601String()}');
   }
 

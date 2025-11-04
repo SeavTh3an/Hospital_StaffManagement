@@ -19,7 +19,7 @@ class HospitalConsole {
   void start() {
     int choice = -1;
     while (choice != 0) {
-      print('\n================ Hospital Staff Management ================');
+      print('\n================== Hospital Staff Management ==================');
       print('1. Add Staff');
       print('2. Remove Staff');
       print('3. Display All Staff');
@@ -50,7 +50,7 @@ class HospitalConsole {
           updateSalary();
           break;
         case 6:
-          print('Total Payroll: \$${staffManager.getTotalMonthlyPayroll().toStringAsFixed(2)}');
+          staffManager.displayMonthlyPayroll();
           break;
         case 7:
           getStaffByPosition();
@@ -173,9 +173,43 @@ class HospitalConsole {
     final list = staffManager.getStaffByPosition(pos);
     if (list.isEmpty) {
       print('No staff found for position: $p');
-    } else {
-      print('--- Staff in ${positionToString(pos)} position ---');
-      for (var s in list) s.displayInfo();
+      return;
+    }
+    print('\n================ Staff in ${positionToString(pos)} Position ================');
+    if (pos == Position.Doctor) {
+      print('${'ID'.padRight(10)}${'Name'.padRight(15)}${'Gender'.padRight(10)}'
+            '${'Specialization'.padRight(20)}${'Experience'.padRight(12)}${'Net Salary'.padRight(15)}');
+      print('--------------------------------------------------------------------------------');
+      for (var s in list) {
+        if (s is Doctor) {
+          final netSalary = s.payroll.calculateNetSalary(s.salary, bonus: s.calculateBonus());
+          print('${s.id.padRight(10)}${s.name.padRight(15)}${s.gender.name.padRight(10)}'
+                '${s.specialization.padRight(20)}${'${s.experienceYears} yrs'.padRight(12)}'
+                '\$${netSalary.toStringAsFixed(2)}'.padRight(15));
+        }
+      }
+    } else if (pos == Position.Nurse) {
+      print('${'ID'.padRight(10)}${'Name'.padRight(15)}${'Gender'.padRight(10)}'
+            '${'Shift'.padRight(15)}${'Net Salary'.padRight(15)}');
+      print('--------------------------------------------------------------------------------');
+      for (var s in list) {
+        if (s is Nurse) {
+          final netSalary = s.payroll.calculateNetSalary(s.salary);
+          print('${s.id.padRight(10)}${s.name.padRight(15)}${s.gender.name.padRight(10)}'
+                '${s.shift.padRight(15)}\$${netSalary.toStringAsFixed(2)}'.padRight(15));
+        }
+      }
+    } else if (pos == Position.Administrative) {
+      print('${'ID'.padRight(10)}${'Name'.padRight(15)}${'Gender'.padRight(10)}'
+            '${'Role'.padRight(15)}${'Net Salary'.padRight(15)}');
+      print('--------------------------------------------------------------------------------');
+      for (var s in list) {
+        if (s is AdministrativeStaff) {
+          final netSalary = s.payroll.calculateNetSalary(s.salary, bonus: s.calculateBonus());
+          print('${s.id.padRight(10)}${s.name.padRight(15)}${s.gender.name.padRight(10)}'
+                '${s.role.name.padRight(15)}\$${netSalary.toStringAsFixed(2)}'.padRight(15));
+        }
+      }
     }
   }
 
@@ -183,24 +217,24 @@ class HospitalConsole {
     stdout.write('Enter shift to check (morning / afternoon / night): ');
     final shift = (stdin.readLineSync() ?? '').toLowerCase();
     final list = staffManager.getDutyToday(shift);
+
     if (list.isEmpty) {
       print('No one on duty for shift: $shift');
-    } else {
-      print('---- On Duty (shift: $shift) ----');
-      for (var s in list) s.displayInfo();
+      return;
+    }
+    print('\n---- Nurses On Duty (Shift: $shift) ----');
+    print('${'ID'.padRight(10)}${'Name'.padRight(15)}${'Gender'.padRight(10)}'
+          '${'Shift'.padRight(15)}${'Net Salary'.padRight(15)}');
+    print('-------------------------------------------------------------');
+    for (var s in list) {
+      final netSalary = s.payroll.calculateNetSalary(s.salary);
+      print('${s.id.padRight(10)}${s.name.padRight(15)}${s.gender.name.padRight(10)}'
+            '${s.shift.padRight(15)}\$${netSalary.toStringAsFixed(2)}'.padRight(15));
     }
   }
 
   void listStaffOnProbation() {
-    final probationStaff = staffManager.getStaffOnProbation();
-    if (probationStaff.isEmpty) {
-      print('No staff currently on probation.');
-    } else {
-      print('--- Staff on Probation ---');
-      for (var s in probationStaff) {
-        s.displayInfo();
-      }
-    }
+    staffManager.displayStaffOnProbation();
   }
 
   Position? positionFromString(String p) {

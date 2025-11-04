@@ -51,8 +51,8 @@ class Nurse extends Staff {
     print('DOB: ${dob.toIso8601String()}');
     print('Position: Nurse');
     print('Shift: $shift');
-    print('Gross Salary: \$${salary.toStringAsFixed(2)}');
     print('Bonus: \$${bonus.toStringAsFixed(2)}');
+    print('Gross Salary: \$${salary.toStringAsFixed(2)}');
     print('Net Salary (after tax & deductions): \$${netSalary.toStringAsFixed(2)}');
     print('Working Years: $workingYears');
     print('Hire Date: ${hireDate.toIso8601String()}');
