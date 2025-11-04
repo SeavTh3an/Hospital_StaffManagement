@@ -1,0 +1,17 @@
+[
+  {
+    "ID": "NUR001",
+    "name": "Theanloy",
+    "dob": "2025-11-04T10:44:44.832145",
+    "gender": "Male",
+    "salary": 10000.0,
+    "position": "Nurse",
+    "hireDate": "2025-11-04T10:44:51.799965",
+    "shift": "night",
+    "payroll": {
+      "tax": 0.08,
+      "insurance": 0.04,
+      "retire": 0.02
+    }
+  }
+]

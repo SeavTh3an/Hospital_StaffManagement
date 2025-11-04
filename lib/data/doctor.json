@@ -4,7 +4,7 @@
     "name": "Thean",
     "dob": "2006-12-20T00:00:00.000",
     "gender": "Male",
-    "salary": 20000.0,
+    "salary": 25000.0,
     "position": "Doctor",
     "hireDate": "2025-11-03T22:55:41.388303",
     "specialization": "Heart",
@@ -16,7 +16,7 @@
     }
   },
   {
-    "ID": "DOC003",
+    "ID": "DOC002",
     "name": "xio",
     "dob": "2025-11-03T22:59:48.719911",
     "gender": "Female",

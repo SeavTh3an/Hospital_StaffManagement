@@ -1,0 +1,17 @@
+[
+  {
+    "ID": "ACC001",
+    "name": "Meyloy",
+    "dob": "2025-11-04T10:48:38.725861",
+    "gender": "Female",
+    "salary": 10000.0,
+    "position": "Administrative",
+    "hireDate": "2025-11-04T10:48:42.223954",
+    "role": "Accountant",
+    "payroll": {
+      "tax": 0.07,
+      "insurance": 0.03,
+      "retire": 0.02
+    }
+  }
+]

@@ -58,7 +58,14 @@ class AdministrativeStaff extends Staff {
 
   @override
   double calculateBonus() {
-    return role == Role.Accountant ? salary * 0.12 : salary * 0.07;
+    switch (role) {
+      case Role.Accountant:
+        return salary * 0.5;
+      case Role.Receptionist:
+        return salary * 0.3;
+      default:
+        return salary * 0.05;
+    }
   }
 
   @override

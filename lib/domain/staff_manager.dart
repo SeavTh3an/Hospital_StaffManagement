@@ -69,7 +69,7 @@ class StaffManager {
   double getTotalMonthlyPayroll() {
     double total = 0;
     for (var s in staffList) {
-      total += s.salary; // or s.payroll.calculateNetSalary(s.salary) for net salary
+      total += s.payroll.calculateNetSalary(s.salary); // ✅ UPDATED: include payroll logic
     }
     return total;
   }

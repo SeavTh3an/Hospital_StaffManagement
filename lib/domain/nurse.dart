@@ -44,6 +44,7 @@ class Nurse extends Staff {
   void displayInfo() {
     final bonus = calculateBonus();
     final workingYears = getWorkingYears();
+    final netSalary = payroll.calculateNetSalary(salary, bonus: bonus);
     print('ID: $id');
     print('Name: $name');
     print('Gender: ${gender.toString().split('.').last}');
@@ -51,9 +52,9 @@ class Nurse extends Staff {
     print('Position: Nurse');
     print('Shift: $shift');
     print('Gross Salary: \$${salary.toStringAsFixed(2)}');
-    print('Net Salary: \$${payroll.calculateNetSalary(salary).toStringAsFixed(2)}');
-    print('Working Years: $workingYears');
     print('Bonus: \$${bonus.toStringAsFixed(2)}');
+    print('Net Salary (after tax & deductions): \$${netSalary.toStringAsFixed(2)}');
+    print('Working Years: $workingYears');
     print('Hire Date: ${hireDate.toIso8601String()}');
   }
 
@@ -79,7 +80,7 @@ class Nurse extends Staff {
   @override
   double calculateBonus() {
     // Nurses get bonus only if night shift
-    return shift.toLowerCase() == 'night' ? salary * 0.10 : 0.0;
+    return isNightShift() ? salary * 0.10 : 0.0;
   }
 
 

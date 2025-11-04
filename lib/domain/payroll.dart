@@ -9,11 +9,11 @@ class Payroll {
     required this.retire,
   });
 
-  double calculateNetSalary(double baseSalary) {
-    final deduction = baseSalary * (tax + insurance + retire);
-    return baseSalary - deduction;
+  double calculateNetSalary(double baseSalary, {double bonus = 0.0}) {
+    final gross = baseSalary + bonus;
+    final deduction = gross * (tax + insurance + retire);
+    return gross - deduction;
   }
-
   // For JSON support
   factory Payroll.fromJson(Map<String, dynamic> json) {
     return Payroll(
