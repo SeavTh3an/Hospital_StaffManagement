@@ -1,6 +1,6 @@
 import 'staff.dart';
 import 'payroll.dart';
-
+enum Role { Receptionist, Accountant }
 class AdministrativeStaff extends Staff {
   Role role;
 
@@ -64,15 +64,33 @@ class AdministrativeStaff extends Staff {
         return salary * 0.5;
       case Role.Receptionist:
         return salary * 0.3;
-      default:
-        return salary * 0.05;
     }
   }
 
-  @override
-  void updateInfo(String newName) {
-    name = newName;
+@override
+void updateInfo(String field, dynamic newValue) {
+  switch (field.toLowerCase()) {
+    case 'name':
+      name = newValue;
+      break;
+    case 'role':
+      final roleLower = newValue.toLowerCase();
+      if (roleLower == 'accountant') {
+        role = Role.Accountant;
+      } else if (roleLower == 'receptionist') {
+        role = Role.Receptionist;
+      } else {
+        print('Invalid role. Choose Accountant or Receptionist.');
+      }
+      break;
+    case 'salary':
+      salary = double.tryParse(newValue.toString()) ?? salary;
+      break;
+    default:
+      print('Invalid field for Administrative Staff. You can update name, role, or salary.');
   }
+}
+
 
   @override
   bool isOnProbation() {

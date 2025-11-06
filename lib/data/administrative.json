@@ -1,12 +1,27 @@
 [
   {
     "ID": "ACC001",
-    "name": "Meyloy",
-    "dob": "2025-11-04T10:48:38.725861",
+    "name": "Meysloy",
+    "dob": "2005-07-22T00:00:00.000",
     "gender": "Female",
-    "salary": 500.0,
+    "salary": 2000.0,
     "position": "Administrative",
-    "hireDate": "2025-11-04T10:48:42.223954",
+    "hireDate": "2025-11-06T00:00:00.000",
+    "role": "Accountant",
+    "payroll": {
+      "tax": 0.07,
+      "insurance": 0.03,
+      "retire": 0.02
+    }
+  },
+  {
+    "ID": "ACC002",
+    "name": "Thean",
+    "dob": "2025-11-06T19:18:03.844261",
+    "gender": "Male",
+    "salary": 2000.0,
+    "position": "Administrative",
+    "hireDate": "2025-11-06T00:00:00.000",
     "role": "Accountant",
     "payroll": {
       "tax": 0.07,
@@ -16,12 +31,12 @@
   },
   {
     "ID": "REC001",
-    "name": "TheanSloy",
-    "dob": "2000-10-01T00:00:00.000",
-    "gender": "Male",
-    "salary": 600.0,
+    "name": "Mey",
+    "dob": "2025-11-06T19:19:43.802464",
+    "gender": "Female",
+    "salary": 2000.0,
     "position": "Administrative",
-    "hireDate": "2025-01-05T00:00:00.000",
+    "hireDate": "2025-11-06T19:19:49.116961",
     "role": "Receptionist",
     "payroll": {
       "tax": 0.07,

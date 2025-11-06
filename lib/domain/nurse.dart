@@ -58,10 +58,20 @@ class Nurse extends Staff {
     print('Hire Date: ${hireDate.toIso8601String()}');
   }
 
-  @override
-  void updateInfo(String newName) {
-    name = newName;
+@override
+void updateInfo(String field, dynamic newValue) {
+  switch (field.toLowerCase()) {
+    case 'name':
+      name = newValue;
+      break;
+    case 'shift':
+      shift = newValue.toLowerCase();
+      break;
+    default:
+      print('Invalid field for Nurse. You can update name or shift.');
   }
+}
+
 
   @override
   bool isOnProbation() {

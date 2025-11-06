@@ -62,10 +62,22 @@ class Doctor extends Staff {
     print('Working Years: $workingYears');
   }
 
-  @override
-  void updateInfo(String newName) {
-    name = newName;
+@override
+void updateInfo(String field, dynamic newValue) {
+  switch (field.toLowerCase()) {
+    case 'name':
+      name = newValue;
+      break;
+    case 'specialization':
+      specialization = newValue;
+      break;
+    case 'experience':
+      experienceYears = int.tryParse(newValue.toString()) ?? experienceYears;
+      break;
+    default:
+      print('Invalid field for Doctor. You can update name, specialization, or experience.');
   }
+}
 
   @override
   bool isOnProbation() {

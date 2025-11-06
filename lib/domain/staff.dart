@@ -5,7 +5,7 @@ import 'adminstrative_staff.dart';
 
 enum Position { Doctor, Nurse, Administrative }
 enum Gender { Male, Female }
-enum Role { Receptionist, Accountant }
+
 
 abstract class Staff {
   // Counters for generating unique IDs
@@ -49,7 +49,6 @@ abstract class Staff {
   )   : position = Position.Administrative,
         id = _generateDisplayID(Position.Administrative, role);
 
-  /// Generate unique IDs based on position and role
   static String _generateDisplayID(Position position, [Role? role]) {
     switch (position) {
       case Position.Doctor:
@@ -74,7 +73,7 @@ abstract class Staff {
   // Abstract methods
   void displayInfo();
   double calculateBonus();
-  void updateInfo(String name); // Updates name
+  void updateInfo(String field, dynamic newValue); // Updates name
   bool isOnProbation();
   int getWorkingYears();
 
