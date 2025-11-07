@@ -14,7 +14,7 @@ class Payroll {
     final deduction = gross * (tax + insurance + retire);
     return gross - deduction;
   }
-  // For JSON support
+  
   factory Payroll.fromJson(Map<String, dynamic> json) {
     return Payroll(
       tax: json['tax'],

@@ -9,7 +9,7 @@ class StaffRepository {
     Position.Administrative: 'data/administrative.json',
   };
 
-  // Load all staff from all position files
+  
   List<Staff> loadAllStaff() {
     List<Staff> allStaff = [];
     for (var entry in _filePaths.entries) {

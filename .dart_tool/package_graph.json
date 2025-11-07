@@ -309,13 +309,18 @@
       ]
     },
     {
-      "name": "sprintf",
-      "version": "7.0.0",
+      "name": "fixnum",
+      "version": "1.1.1",
       "dependencies": []
     },
     {
       "name": "meta",
       "version": "1.17.0",
+      "dependencies": []
+    },
+    {
+      "name": "sprintf",
+      "version": "7.0.0",
       "dependencies": []
     },
     {
@@ -458,11 +463,6 @@
         "meta",
         "path"
       ]
-    },
-    {
-      "name": "fixnum",
-      "version": "1.1.1",
-      "dependencies": []
     }
   ],
   "configVersion": 1

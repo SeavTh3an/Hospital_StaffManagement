@@ -7,7 +7,7 @@ import 'package:my_first_project/domain/staff.dart';
 import 'package:my_first_project/domain/staff_manager.dart';
 import 'package:my_first_project/data/staff_repository.dart';
 
-// A lightweight test repository that avoids touching the real filesystem
+
 class TestRepository extends StaffRepository {
   final List<Staff> initial;
   List<Staff>? lastSaved;
@@ -28,7 +28,6 @@ void main() {
     test('calculateNetSalary works correctly', () {
       final payroll = Payroll(tax: 0.1, insurance: 0.05, retire: 0.02);
       final net = payroll.calculateNetSalary(1000.0, bonus: 100.0);
-      // gross = 1100, deductions = 1100 * 0.17 = 187, net = 913
       expect(net, closeTo(913.0, 0.0001));
     });
 
@@ -47,11 +46,13 @@ void main() {
     final nursePayroll = Payroll(tax: 0.1, insurance: 0.05, retire: 0.03);
     final adminPayroll = Payroll(tax: 0.08, insurance: 0.04, retire: 0.02);
 
+    // we use late for assign them the value later and it allows share variable for multiple tests
     late Doctor doc;
     late Nurse nurse;
     late AdministrativeStaff receptionist;
     late AdministrativeStaff accountant;
 
+    
     setUp(() {
       doc = Doctor(
         name: 'Dr Test',
@@ -105,6 +106,7 @@ void main() {
     test('toJson/fromJson roundtrip for Doctor', () {
       final json = doc.toJson();
       final restored = Staff.fromJson(json);
+      // Ai generator
       expect(restored, isA<Doctor>());
       final rdoc = restored as Doctor;
       expect(rdoc.name, equals(doc.name));
@@ -118,10 +120,8 @@ void main() {
       // Nurse night shift -> 10% bonus
       expect(nurse.calculateBonus(), closeTo(nurse.salary * 0.10, 0.001));
       // Admin roles
-      expect(receptionist.calculateBonus(),
-          closeTo(receptionist.salary * 0.3, 0.001));
-      expect(
-          accountant.calculateBonus(), closeTo(accountant.salary * 0.5, 0.001));
+      expect(receptionist.calculateBonus(), closeTo(receptionist.salary * 0.3, 0.001));
+      expect(accountant.calculateBonus(), closeTo(accountant.salary * 0.5, 0.001));
     });
 
     test('isOnProbation and working years', () {

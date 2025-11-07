@@ -89,7 +89,6 @@ void updateInfo(String field, dynamic newValue) {
 
   @override
   double calculateBonus() {
-    // Nurses get bonus only if night shift
     return isNightShift() ? salary * 0.10 : 0.0;
   }
 
